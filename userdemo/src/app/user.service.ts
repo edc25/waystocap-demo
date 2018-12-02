@@ -19,12 +19,22 @@ export class UserService {
   getUsers(): Observable<User[]>{
     const uri = environment.rootUrl + '/users';
     this.http.get(uri).pipe(map(res =>{console.log(res)}));
-    return this.http.get<User[]>(uri).pipe(map(res => { return res; }));
+    return this.http.get<User[]>(uri).pipe(map(res => { 
+      res.forEach(u => u.avatarUrl = uri + '/' + u._id+'/avatar');
+      return res; 
+    }));
   }
 
   saveUser(user: User): Observable<any>{
-    const uri = environment.rootUrl + '/users';
-    return this.http.put(uri,user, this.httpOptions);
+    if (user._id)
+    {
+      const uri = environment.rootUrl + '/users/' + user._id;
+      return this.http.put(uri,user, this.httpOptions);
+    }
+    else{
+      const uri = environment.rootUrl + '/users';
+      return this.http.post(uri, user, this.httpOptions);
+    }
   }
 }
 

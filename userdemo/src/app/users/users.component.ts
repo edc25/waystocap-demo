@@ -28,5 +28,8 @@ export class UsersComponent implements OnInit {
   onSelect(user: User): void{
     this.selectedUser = user;
   }
+  selectNewUser(): void{
+    this.selectedUser = new User();
+  }
 
 }

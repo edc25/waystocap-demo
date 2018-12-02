@@ -1,6 +1,10 @@
 export class User{
-    id: string
+    _id: string
     name: string
     email: string
+    image: string
+    imageType: string
+    imageChanged: boolean
     avatarUrl: string
+
 }

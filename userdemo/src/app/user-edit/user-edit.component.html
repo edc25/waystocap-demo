@@ -10,6 +10,9 @@
       <input [(ngModel)]="user.email" placeholder="email"/>
     </label>
   </div>
+  <div>
+    <input type="file" (change)="onSelectFile($event)" />
+  </div>
   <img src="{{user.avatarUrl}}" />
   <button (click)="save()">Save</button>
 
