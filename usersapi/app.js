@@ -15,7 +15,8 @@ var app = express();
 var originsWhitelist=['http://localhost:4200', 'http://192.168.178.60:4200'];
 var corsOptions = { 
   origin: function(origin, callback){
-    var isWhitelisted = originsWhitelist.indexOf(origin) !== -1;
+    //var isWhitelisted = originsWhitelist.indexOf(origin) !== -1;
+    let isWhitelisted = true;
     callback(null, isWhitelisted);
   },
   credentials: true
