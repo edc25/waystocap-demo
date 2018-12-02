@@ -8,8 +8,19 @@ var mongoose = require('mongoose');
 var env = require('dotenv').load();
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
+var cors = require('cors')
 var app = express();
+
+
+var originsWhitelist=['http://localhost:4200', 'http://192.168.178.60:4200'];
+var corsOptions = { 
+  origin: function(origin, callback){
+    var isWhitelisted = originsWhitelist.indexOf(origin) !== -1;
+    callback(null, isWhitelisted);
+  },
+  credentials: true
+}
+app.use(cors(corsOptions));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -53,5 +64,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 module.exports = app;
