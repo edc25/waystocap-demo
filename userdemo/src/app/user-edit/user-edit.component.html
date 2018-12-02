@@ -6,6 +6,11 @@
     <label>name:
       <input [(ngModel)]="user.name" placeholder="name"/>
     </label>
+    <label>email:
+      <input [(ngModel)]="user.email" placeholder="email"/>
+    </label>
   </div>
+  <img src="{{user.avatarUrl}}" />
+  <button (click)="save()">Save</button>
 
 </div>

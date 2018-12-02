@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { User } from '../user';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-user-edit',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserEditComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
+  @Input() user:User
   ngOnInit() {
+  }
+
+  save(): void{
+    this.userService.saveUser(this.user).subscribe(() => window.alert('saved'));
   }
 
 }
