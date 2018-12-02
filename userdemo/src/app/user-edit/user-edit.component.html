@@ -11,9 +11,9 @@
     </label>
   </div>
   <div>
-    <input type="file" (change)="onSelectFile($event)" />
+    <label>Choose New Avatar<input type="file" (change)="onSelectFile($event)"  /></label>
   </div>
-  <img src="{{user.avatarUrl}}" />
+  <img *ngIf="user.imageType" src="{{user.avatarUrl}}" />
   <button (click)="save()">Save</button>
 
 </div>
