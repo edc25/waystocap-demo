@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import { User } from '../user';
 import { UserService } from '../user.service';
 
@@ -15,8 +15,10 @@ export class UserEditComponent implements OnInit {
   ngOnInit() {
   }
 
+  @ViewChild('fileInput') fileInput: ElementRef;
+
   save(): void{
-    this.userService.saveUser(this.user).subscribe(() => window.alert('saved'));
+    //this.userService.saveUser(this.user).subscribe(() => window.alert('saved'));
   }
 
   onSelectFile(event){
@@ -26,8 +28,9 @@ export class UserEditComponent implements OnInit {
       reader.readAsDataURL(event.target.files[0]);
       let userToAlter = this.user;
       let fileType = event.target.files[0].fileType;
+      let input = this.fileInput;
       reader.onload = function(){
-        
+
         let fullText = reader.result.toString();
         let splitOutHeader = fullText.split(',',2);
 
@@ -36,9 +39,16 @@ export class UserEditComponent implements OnInit {
         userToAlter.image = fileText;
         userToAlter.imageType = mimeType;
         userToAlter.imageChanged = true;
+        userToAlter.base64ImageUrl = fullText;
+        userToAlter.isDirty = true;
+        
+        input.nativeElement.value = "";
       }
-      
     }
+  }
+
+  markDirty(event){
+    this.user.isDirty = true;
   }
 
 }

@@ -4,16 +4,15 @@
   <div><span>id: </span>{{user.id}}</div>
   <div>
     <label>name:
-      <input [(ngModel)]="user.name" placeholder="name"/>
+      <input [(ngModel)]="user.name" placeholder="name" (change)="markDirty($event)" />
     </label>
     <label>email:
-      <input [(ngModel)]="user.email" placeholder="email"/>
+      <input [(ngModel)]="user.email" placeholder="email" (change)="markDirty($event)" />
     </label>
   </div>
   <div>
-    <label>Choose New Avatar<input type="file" (change)="onSelectFile($event)"  /></label>
+    <label>Choose New Avatar<input type="file" (change)="onSelectFile($event)" #fileInput /></label>
   </div>
-  <img *ngIf="user.imageType" src="{{user.avatarUrl}}" />
-  <button (click)="save()">Save</button>
-
+  <div *ngIf="user.imageChanged"><img src="{{user.base64ImageUrl}}"></div>
+  <img *ngIf="user.imageType && !user.imageChanged" src="{{user.avatarUrl}}" />
 </div>

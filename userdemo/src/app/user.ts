@@ -6,5 +6,6 @@ export class User{
     imageType: string
     imageChanged: boolean
     avatarUrl: string
-
+    isDirty: boolean
+    base64ImageUrl: string
 }

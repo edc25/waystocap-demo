@@ -8,12 +8,6 @@ import { UserService } from '../user.service';
   styleUrls: ['./users.component.less']
 })
 export class UsersComponent implements OnInit {
-  // user: User = {
-  //   id: "1",
-  //   name: 'Bob',
-  //   avatarUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/SIPI_Jelly_Beans_4.1.07.tiff/lossy-page1-440px-SIPI_Jelly_Beans_4.1.07.tiff.jpg',
-  //   email: 'bob@bob.com'
-  // }
 
   users: User[];
   selectedUser: User;
@@ -30,6 +24,10 @@ export class UsersComponent implements OnInit {
   }
   selectNewUser(): void{
     this.selectedUser = new User();
+    this.users = this.users.concat(this.selectedUser);
+  }
+  sync(): void{
+    this.userService.saveUsers(this.users).subscribe(() => this.getUsers());
   }
 
 }
