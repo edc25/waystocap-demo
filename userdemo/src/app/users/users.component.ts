@@ -27,7 +27,8 @@ export class UsersComponent implements OnInit {
     this.users = this.users.concat(this.selectedUser);
   }
   sync(): void{
-    this.userService.saveUsers(this.users).subscribe(() => this.getUsers());
+    this.userService.saveUsers(this.users).subscribe(() => {}, () => {}, () => this.getUsers());
+    this.selectedUser = null;
   }
 
 }
